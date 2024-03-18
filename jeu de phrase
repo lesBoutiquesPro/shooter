@@ -1,0 +1,35 @@
+const readline =
+require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout
+});
+
+const randomNumber =
+Math.floor(Math.random() * 100) * 1;
+let attempts = 0;
+
+console.log("Bienvenue dans le jeu de devinette !\nDevinez un nombre entre 1 et 100");
+
+function askQuestion() {
+    readline.question('Entrez votre nombre :
+    ', (guess) => {
+        const guessNumber = parseInt(guess);
+        if (isNaN(guessNumber)) {
+            console.log("Veuillez entrer un nombre valide");
+        } else {
+            attempts++;
+            if (guessNumber === randomNumber) {
+                console.log(`Félicitations ! Avez deviné le nombre en $(attepts) essais.`);
+                readline.close();
+            } else if (guessNumber < randomNumber) {
+                console.log("Le nombre que vous avez deviné est trop petit. Essayez encore !");
+                askQuestion();
+            } else {
+                console.log("Le nombre que vous avez deviné est trop grand. Essayez encore !*");
+                askQuestion();
+            }
+        }
+    });
+}
+
+askQuestions();
